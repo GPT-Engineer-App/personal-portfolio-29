@@ -10,6 +10,9 @@ const Navigation = () => {
       <Link as={RouterLink} to="/register">
         Register
       </Link>
+      <Link as={RouterLink} to="/login">
+        Log In
+      </Link>
     </HStack>
   );
 };
