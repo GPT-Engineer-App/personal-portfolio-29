@@ -1,23 +1,35 @@
 import { Container, VStack, Heading, Input, Button, useToast } from "@chakra-ui/react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "../services/authService";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const toast = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = { email, password };
-    console.log(formData);
-    toast({
-      title: "Login Successful",
-      description: "You have successfully logged in.",
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    });
+    try {
+      login(email, password);
+      toast({
+        title: "Login Successful",
+        description: "You have successfully logged in.",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+      navigate("/");
+    } catch (error) {
+      toast({
+        title: "Login Failed",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   };
 
   return (
