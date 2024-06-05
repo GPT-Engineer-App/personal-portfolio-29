@@ -1,14 +1,23 @@
-import { Container, VStack, Heading, Input, Button } from "@chakra-ui/react";
+import { Container, VStack, Heading, Input, Button, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const toast = useToast();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = { email, password };
     console.log(formData);
+    toast({
+      title: "Login Successful",
+      description: "You have successfully logged in.",
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
   };
 
   return (
